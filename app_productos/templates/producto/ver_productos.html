@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Ver Productos</h3>
+<table class="table table-striped">
+  <thead><tr><th>Nombre</th><th>Precio</th><th>Stock</th><th>Categoría</th><th>Acciones</th></tr></thead>
+  <tbody>
+    {% for p in productos %}
+    <tr>
+      <td>{{ p.nombre }}</td>
+      <td>{{ p.precio_venta }}</td>
+      <td>{{ p.stock }}</td>
+      <td>{{ p.categoria|default:"-" }}</td>
+      <td>
+        <a class="btn btn-sm btn-secondary" href="{% url 'actualizar_producto' p.id %}">Editar</a>
+        <a class="btn btn-sm btn-danger" href="{% url 'borrar_producto' p.id %}">Borrar</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5">No hay productos.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
